@@ -1,90 +1,101 @@
-# 📈 Website Traffic & Keyword Analysis
+# 📊 Website Traffic & Google AdWords Analysis
 
-**An end-to-end project using Excel, Python, MySQL, Pandas, NumPy, and Power BI to analyze keyword performance and website traffic. The analysis is based on a structured data model with a central fact table and supporting dimension tables, providing insights for SEO and digital marketing strategies.**
+**An end-to-end project using Python, Excel, MySQL, Pandas, NumPy, and Power BI to analyze website traffic and Google AdWords data. The analysis focuses on keyword performance, CPC, competition, and traffic trends—structured using a star schema to provide actionable insights for digital marketing and SEO strategy.**
 
 ## 🎯 Project Objective
 
-The objective of this project is to transform raw keyword traffic data into meaningful insights. Starting from a raw Excel file, the process involves cleaning, structuring, and analyzing the data to:
-- Track keyword ranking and traffic changes
-- Identify high-traffic, low-competition opportunities
-- Assess cost-effectiveness through CPC and difficulty scores
-- Drive SEO and content decisions using interactive dashboards
+The objective of this project is to transform raw AdWords and traffic data into a structured, relational model that enables deep analysis of:
+- Keyword performance trends and ranking changes
+- CPC, competition, and keyword difficulty impact
+- High-traffic, low-cost keyword opportunities
+- Budget optimization and SEO strategy refinement
 
 ## 🛠️ Tools Used
 
 | Tool/Library        | Purpose                                                                 |
 |---------------------|-------------------------------------------------------------------------|
-| **Python** (Jupyter Notebook) | Assign keyword IDs and create structured fact table                     |
-| **Pandas**          | Data manipulation, analysis, and export                                 |
-| **NumPy**           | Support for numerical operations and cleaning                           |
-| **MySQL**           | Structured relational schema and querying                               |
-| **Excel**           | Used for generating dimension tables using VLOOKUP, XLOOKUP, SUMIF, etc.|
-| **Power BI**        | Visual dashboards and interactive reporting                             |
+| **Python** (Jupyter Notebook) | Assign `keyword_id`, preprocess raw data, and generate fact table        |
+| **Pandas**          | Data manipulation and transformation                                    |
+| **NumPy**           | Support for numeric operations                                          |
+| **Excel**           | Generate dimension tables using VLOOKUP, XLOOKUP, and SUMIF             |
+| **MySQL**           | Load structured CSVs, define schema, and establish table relationships  |
+| **Power BI**        | Build dashboards and visualize keyword performance and cost trends      |
 
 ## 📁 Project Files
 
 ### 📄 Data Files
-- **Raw Source File**
-  - `traffic_data_RAW.xls` – Original raw keyword traffic export  
+- **Raw Data**
+  - `traffic_data_RAW.xls` – Original export from AdWords/SEO tool  
 - **Fact Table**
-  - `website_traffic_data.csv` – Cleaned dataset with keyword metrics and IDs (generated using Python)  
+  - `website_traffic_data.csv` – Cleaned data with assigned `keyword_id`s  
 - **Dimension Tables** *(generated in Excel using formulas)*
-  - `keyword.csv` – Keyword ID and text mapping (via XLOOKUP/VLOOKUP)  
-  - `competition.csv` – Competition data extracted with lookup functions  
-  - `keyword_difficulty.csv` – Difficulty scores compiled using SUMIF and lookups  
+  - `keyword.csv` – Keyword to ID mapping  
+  - `competition.csv` – Competition scores  
+  - `keyword_difficulty.csv` – Difficulty ratings  
 
 ### ⚙️ Scripts & Notebooks
-- `assaign_keyword_ID.ipynb` – Python notebook for generating the fact table  
-- `traffic_data_script.sql` – SQL schema with foreign key constraints  
+- `assaign_keyword_ID.ipynb` – Python notebook to assign `keyword_id`s and generate base data  
+- `traffic_data_script.sql` – SQL script to create schema and apply primary/foreign keys  
 
 ## 🔄 Workflow
 
-1. **Raw Data Import**  
-   Start with `traffic_data_RAW.xls`, the raw keyword dataset.
+1. **Raw Data Import (Excel)**  
+   Start with `traffic_data_RAW.xls` as the raw data source.
 
-2. **Generate Dimension Tables in Excel**  
-   Use **VLOOKUP, XLOOKUP, and SUMIF** to create clean dimension tables (`keyword`, `competition`, `keyword_difficulty`) from raw data.
+2. **Assign Keyword IDs in Python**  
+   Use Python to process the raw data and assign unique `keyword_id`s.
 
-3. **Assign Keyword IDs & Create Fact Table in Python**  
-   Use Python to generate unique `keyword_id`s and build the structured `website_traffic_data.csv` fact table.
+3. **Create Dimension Tables in Excel**  
+   Generate `keyword.csv`, `competition.csv`, and `keyword_difficulty.csv` using Excel formulas like VLOOKUP, XLOOKUP, and SUMIF.
 
-4. **Export Structured Data**  
-   Save cleaned `.csv` files for use in MySQL and analysis.
+4. **Export All Tables as CSV**  
+   Save both the fact and dimension tables as `.csv` files.
 
-5. **Database Setup in MySQL**  
-   Use the provided SQL script to create a relational schema and establish foreign key relationships.
+5. **Load Data into MySQL**  
+   Import all CSVs into MySQL and run the SQL script to:
+   - Create structured tables
+   - Define **primary keys** in dimension tables
+   - Establish **foreign key relationships** from the fact table
 
-6. **Data Analysis with Pandas/NumPy**  
-   Perform trend analysis and EDA in Python.
+6. **Data Analysis in Python**  
+   Use Pandas and NumPy to explore trends, CPC impact, traffic changes, and performance patterns.
 
-7. **Excel Validation**  
-   Double-check table logic and calculations through Excel summaries.
+7. **Validate in Excel**  
+   Cross-check keyword mappings, IDs, and aggregates.
 
-8. **Power BI Visualization**  
-   Build visual dashboards to communicate keyword performance insights effectively.
+8. **Visualize in Power BI**  
+   Build interactive dashboards to present keyword insights, traffic cost, and AdWords performance.
 
 ## 🧩 Data Model Overview
 
 | Table Name              | Type         | Description                              | Key Field     | Related To             |
 |-------------------------|--------------|------------------------------------------|---------------|-------------------------|
-| `website_traffic_data`  | Fact Table   | Core traffic metrics for each keyword    | `keyword_id`  | All dimension tables    |
-| `keyword`               | Dimension    | Keyword text and corresponding ID        | `keyword_id`  | `website_traffic_data` |
-| `competition`           | Dimension    | Competition score for each keyword       | `keyword_id`  | `website_traffic_data` |
-| `keyword_difficulty`    | Dimension    | Difficulty score for each keyword        | `keyword_id`  | `website_traffic_data` |
+| `website_traffic_data`  | Fact Table   | Traffic, CPC, keyword performance data   | `keyword_id`  | All dimension tables    |
+| `keyword`               | Dimension    | Keyword name and ID                      | `keyword_id`  | `website_traffic_data` |
+| `competition`           | Dimension    | Keyword competition score                | `keyword_id`  | `website_traffic_data` |
+| `keyword_difficulty`    | Dimension    | Difficulty rating of each keyword        | `keyword_id`  | `website_traffic_data` |
 
-> 🔗 All dimension tables were generated in Excel and linked to the fact table via `keyword_id`.
+> ✅ Fact table generated using **Python**  
+> ✅ Dimension tables generated using **Excel**  
+> ✅ All CSVs imported into **MySQL**  
+> ✅ Relationships enforced via **primary and foreign keys**
 
 ## ✅ Key Features
-- Assign unique keyword IDs and build relational structure  
-- Generate dimension tables using Excel formulas (VLOOKUP, XLOOKUP, SUMIF)  
-- Analyze keyword trends, CPC, difficulty, and competition  
-- Create Power BI dashboards for actionable SEO insights  
+- Assign and manage keyword IDs for structured analysis  
+- Generate dimension tables using Excel lookup formulas  
+- Load structured data into MySQL with relational integrity  
+- Analyze CPC, difficulty, and competition effects  
+- Build dashboards to support SEO and Ad strategy  
 
 ## 🚀 How to Use
-1. Start with `traffic_data_RAW.xls`  
-2. Generate dimension tables in Excel using lookup formulas  
-3. Use Python to create the fact table  
-4. Set up schema using `traffic_data_script.sql` in MySQL  
-5. Analyze with Python & visualize with Excel or Power BI  
+1. Open and process `traffic_data_RAW.xls` using Python  
+2. Assign keyword IDs and export `website_traffic_data.csv`  
+3. Use Excel to generate dimension tables and export them  
+4. Load all CSVs into MySQL  
+5. Run `traffic_data_script.sql` to define relationships  
+6. Explore trends with Python and visualize insights in Power BI  
+
+---
+
 
 ---
