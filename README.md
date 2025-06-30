@@ -1,6 +1,24 @@
 # 📊 Website Traffic & Google AdWords Analysis
 
-**An end-to-end project using Python, Excel, MySQL, Pandas, NumPy, and Power BI to analyze website traffic and Google AdWords data. This project transforms raw keyword-level data into a structured relational model to uncover insights for SEO, CPC trends, and digital marketing optimization.**
+**An end-to-end project using Python, Jupyter Notebook, Excel, MySQL, Pandas, NumPy, and Power BI to analyze website traffic and Google AdWords data. This project transforms raw keyword-level data into a structured relational model to uncover insights for SEO, CPC trends, and digital marketing optimization.**
+
+---
+
+## 📚 Table of Contents
+
+- [🎯 Project Objective](#-project-objective)
+- [🛠️ Tools Used](#️-tools-used)
+- [📁 Project Files](#-project-files)
+- [🔄 Workflow](#-workflow)
+  - [🐍 1. Python (Jupyter Notebook – Data Cleaning & Fact Table Creation)](#-1-python-jupyter-notebook--data-cleaning--fact-table-creation)
+  - [📊 2. Excel (Dimension Table Generation)](#-2-excel-dimension-table-generation)
+  - [🛢️ 3. MySQL (Data Integration & Relational Modeling)](#-3-mysql-data-integration--relational-modeling)
+  - [📈 4. Power BI (Visualization & Reporting)](#-4-power-bi-visualization--reporting)
+- [🧩 Data Model Overview](#-data-model-overview)
+- [✅ Key Features](#-key-features)
+- [🚀 How to Use](#-how-to-use)
+
+---
 
 ## 🎯 Project Objective
 
@@ -14,12 +32,13 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 
 | Tool/Library        | Purpose                                                                 |
 |---------------------|-------------------------------------------------------------------------|
-| **Python** (Jupyter Notebook) | Assign `keyword_id`, clean raw data, and create the fact table data         |
-| **Pandas**          | Data manipulation and merging                                           |
-| **NumPy**           | Support for numerical calculations and transformations                 |
-| **Excel**           | Generate dimension tables using VLOOKUP, XLOOKUP, SUMIF                |
-| **MySQL**           | Load CSVs, define schema, and apply PK-FK relationships                 |
-| **Power BI**        | Build dashboards and visualize traffic and AdWords insights             |
+| **Python**           | Assign `keyword_id`, clean raw data, and create the fact table         |
+| **Jupyter Notebook** | Interactive environment for executing Python code step by step         |
+| **Pandas**           | Data manipulation and merging                                          |
+| **NumPy**            | Support for numerical calculations and transformations                 |
+| **Excel**            | Generate dimension tables using VLOOKUP, XLOOKUP, SUMIF                |
+| **MySQL**            | Load CSVs, define schema, and apply PK-FK relationships                |
+| **Power BI**         | Build dashboards and visualize traffic and AdWords insights            |
 
 ## 📁 Project Files
 
@@ -34,7 +53,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
   - `keyword_difficulty.csv` – Difficulty ratings per keyword  
 
 ### ⚙️ Scripts & Notebooks
-- `assaign_keyword_ID.ipynb` – Python notebook to:
+- `assaign_keyword_ID.ipynb` – Jupyter Notebook to:
   - Assign unique `keyword_id`s  
   - Clean and prepare the raw data  
   - Generate the `website_traffic_data.csv` fact table  
@@ -45,7 +64,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 
 ## 🔄 Workflow
 
-### 🐍 1. Python (Data Cleaning & Fact Table Creation)
+### 🐍 1. Python (Jupyter Notebook – Data Cleaning & Fact Table Creation)
 - Load raw data from `traffic_data_RAW.xls`
 - Assign unique `keyword_id`s using Python
 - Clean and structure the dataset using Pandas and NumPy
@@ -80,7 +99,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 | `competition`           | Dimension    | Competition score per keyword               | `keyword_id`  | `website_traffic_data` |
 | `keyword_difficulty`    | Dimension    | Difficulty score per keyword                | `keyword_id`  | `website_traffic_data` |
 
-> ✅ Fact table created using **Python**  
+> ✅ Fact table created using **Python (Jupyter Notebook)**  
 > ✅ Dimension tables created using **Excel**  
 > ✅ Relational model built and linked in **MySQL**  
 > ✅ Insights visualized through **Power BI**
