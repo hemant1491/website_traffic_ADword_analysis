@@ -78,7 +78,7 @@ Each stage builds on the last. The result is a smooth, production-style pipeline
 
 ### 🐍 1. Python (Jupyter Notebook – Data Cleaning & Fact Table Creation)
 - Load raw data from `traffic_data_RAW.xls`
-[- !images/excel_raw_data.png](https://github.com/hemant1491/website_traffic_ADword_analysis/blob/82e96b44ce0b7bc3c07e7f48e1eadac3369f6695/images/excel_raw_data.png)
+![images/excel_raw_data.png](https://github.com/hemant1491/website_traffic_ADword_analysis/blob/82e96b44ce0b7bc3c07e7f48e1eadac3369f6695/images/excel_raw_data.png)
 - Assign unique `keyword_id`s using Python
 - Clean and structure the dataset using Pandas and NumPy
 - Export the cleaned fact table to `website_traffic_data.csv`
