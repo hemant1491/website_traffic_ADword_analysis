@@ -80,6 +80,32 @@ Each stage builds on the last. The result is a smooth, production-style pipeline
 - Load raw data from `traffic_data_RAW.xls`
 ![images/excel_raw_data.png](https://github.com/hemant1491/website_traffic_ADword_analysis/blob/82e96b44ce0b7bc3c07e7f48e1eadac3369f6695/images/excel_raw_data.png)
 - Assign unique `keyword_id`s using Python
+```python
+  def key_id(value):
+    if 'scrum' in value or 'csm' in value or 'smum' in value or 'srum' in value:
+        return 1
+    elif 'amazon' in value or 'aws' in value or 'devops' in value:
+        return 2
+    elif 'pmp' in value or 'project management' in value or 'pmi' in value or 'proyectos' in value or 'it project' in value:
+        return 3
+    elif 'cloud' in value:
+        return 4
+    elif 'capm' in value:
+        return 5
+    elif 'cspo' in value:
+        return 6
+    elif 'itil' in value or 'itl' in value:
+        return 7
+    elif 'simpl' in value or 'simli' in value or 'simpi' in value or 'smpli' in value or 'simi' in value or 'sipli' in value:
+        return 8
+    elif 'safe' in value or 'scale' in value:
+        return 9
+    elif 'togaf' in value or 'udacity' in value or 'it architect' in value:
+        return 10
+    
+excel['Keyword ID'] = excel['Keyword'].apply(key_id)
+excel.head(10)
+  ```
 - Clean and structure the dataset using Pandas and NumPy
 - Export the cleaned fact table to `website_traffic_data.csv`
 
