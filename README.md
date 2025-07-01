@@ -64,6 +64,18 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 
 ## 🔄 Workflow
 
+```mermaid
+graph LR
+    A[Raw Excel] --> B[Excel Formulas]
+    B --> C[Python Script]
+    C --> D[MySQL Database]
+    D --> E[Power BI Dashboard]
+```
+
+Each stage builds on the last. The result is a smooth, production-style pipeline from messy input to insights.
+
+---
+
 ### 🐍 1. Python (Jupyter Notebook – Data Cleaning & Fact Table Creation)
 - Load raw data from `traffic_data_RAW.xls`
 - Assign unique `keyword_id`s using Python
