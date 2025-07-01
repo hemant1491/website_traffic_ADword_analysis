@@ -66,8 +66,8 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 
 ```mermaid
 graph LR
-    A[Raw Excel] --> B[Excel Formulas]
-    B --> C[Python Script]
+    A[Raw Excel] --> B[Python Script]
+    B --> C[Excel Formulas]
     C --> D[MySQL Database]
     D --> E[Power BI Dashboard]
 ```
