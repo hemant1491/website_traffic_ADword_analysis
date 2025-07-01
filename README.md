@@ -80,6 +80,14 @@ Each stage builds on the last. The result is a smooth, production-style pipeline
 - Load raw data from `traffic_data_RAW.xls`
 ![images/excel_raw_data.png](https://github.com/hemant1491/website_traffic_ADword_analysis/blob/82e96b44ce0b7bc3c07e7f48e1eadac3369f6695/images/excel_raw_data.png)
 - Assign unique `keyword_id`s using Python
+
+```python
+import numpy as np
+import pandas as pd
+
+excel = pd.read_excel(io='traffic_data_RAW.xls',sheet_name='Sheet 1 - traffic_data-adwords.',header=1)
+excel.head(10)
+  ```
 ```python
   def key_id(value):
     if 'scrum' in value or 'csm' in value or 'smum' in value or 'srum' in value:
