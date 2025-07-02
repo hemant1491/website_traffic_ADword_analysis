@@ -178,12 +178,14 @@ CREATE TABLE website_traffic_data (
 ![MySQL Table Relation](images/mysql_table_relation.png)
 
 ### 📈 4. Power BI (Visualization, Modeling & DAX)
+![Dashboard](images/traffic_data_dashboard.png)
 
 #### 📐 Data Modeling in Power BI
 - Imported all tables directly from MySQL
 - Verified relationships using Power BI’s model view
 - Ensured correct cardinality and cross-filtering direction
 - Modeled using a clean **star schema** layout for performance and clarity
+![Data Modeling](images/power_bi_modeling.png)
 
 #### 🧮 DAX Measures and Logic
 - Created calculated columns and measures such as:
