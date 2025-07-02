@@ -118,7 +118,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 
 ## 👤 About Me
 
-Hi, I'm [Your Name], a data enthusiast passionate about turning raw data into meaningful business insights.
+Hi, I'm [Hemant], a data enthusiast passionate about turning raw data into meaningful business insights.
 
 🔧 **Skills Used in This Project:**
 - Python (Pandas, NumPy) for data cleaning and transformation
@@ -131,9 +131,9 @@ Hi, I'm [Your Name], a data enthusiast passionate about turning raw data into me
 I led the full pipeline — from raw data preparation to final dashboarding — ensuring data integrity, structure, and business relevance at every stage.
 
 📫 **Let’s connect:**  
-- GitHub: [your-github-username](https://github.com/your-github-username)  
+- GitHub: [your-github-username](https://github.com/hemant1491)  
 - LinkedIn: [your-linkedin-profile](https://www.linkedin.com/in/your-linkedin-username/)  
-- Email: your.email@example.com
+- Email: hemant0452@outlook.com
 
 ---
 
