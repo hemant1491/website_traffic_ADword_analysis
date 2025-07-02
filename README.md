@@ -126,7 +126,7 @@ website_traffic_data.head(10)
 - Export:
   - `website_traffic_data.csv` (fact table)
   ![Website Traffic Data](images/website_traffic_data.png)
-  - `keyword.csv` (dimension table)
+  - `keyword.csv` (dimension table)         
   ![keyword](images/keyword.png)
 
 ### 📊 2. Excel (Other Dimension Table Generation)
