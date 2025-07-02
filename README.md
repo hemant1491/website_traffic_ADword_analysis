@@ -67,6 +67,31 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 - Load `traffic_data_RAW.xls`
 ![Excel Raw Data](images/excel_raw_data.png)
 - Assign unique `keyword_id`s using Python
+  def keyword_id(text):
+    if 'scrum' in text or 'csm' in text or 'smum' in text or 'srum' in text:
+        return 1
+    elif 'amazon' in text or 'aws' in text or 'devops' in text:
+        return 2
+    elif 'pmp' in text or 'project management' in text or 'pmi' in text or 'proyectos' in text or 'it project' in text:
+        return 3
+    elif 'cloud' in text:
+        return 4
+    elif 'capm' in text:
+        return 5
+    elif 'cspo' in text:
+        return 6
+    elif 'itil' in text or 'itl' in text:
+        return 7
+    elif 'simpl' in text or 'simli' in text or 'simpi' in text or 'smpli' in text or 'simi' in text or 'sipli' in text:
+        return 8
+    elif 'safe' in text or 'scale' in text:
+        return 9
+    elif 'togaf' in text or 'udacity' in text or 'it architect' in text:
+        return 10
+
+    
+df['Keyword ID'] = df['Keyword'].apply(keyword_id)
+df.head(10)
 - Clean and format data using Pandas and NumPy
 - Export:
   - `website_traffic_data.csv` (fact table)  
