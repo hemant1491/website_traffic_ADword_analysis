@@ -67,6 +67,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 - Load `traffic_data_RAW.xls`
 ![Excel Raw Data](images/excel_raw_data.png)
 - Assign unique `keyword_id`s using Python
+```python
   def keyword_id(text):
     if 'scrum' in text or 'csm' in text or 'smum' in text or 'srum' in text:
         return 1
@@ -89,9 +90,9 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
     elif 'togaf' in text or 'udacity' in text or 'it architect' in text:
         return 10
 
-    
 df['Keyword ID'] = df['Keyword'].apply(keyword_id)
 df.head(10)
+```
 - Clean and format data using Pandas and NumPy
 - Export:
   - `website_traffic_data.csv` (fact table)  
