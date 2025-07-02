@@ -131,8 +131,10 @@ website_traffic_data.head(10)
 
 ### 📊 2. Excel (Other Dimension Table Generation)
 - Use Excel formulas (VLOOKUP, XLOOKUP, SUMIF) to create:
-  - `competition.csv`  
+  - `competition.csv`
+  ![Competition](images/competition.png)
   - `keyword_difficulty.csv`
+  ![Keyword Difficulty](images/keyword_difficulty.png)
 
 ### 🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)
 - **Create `website_traffic_data` table structure first** in MySQL to avoid data mismatch
