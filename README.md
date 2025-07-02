@@ -131,7 +131,7 @@ Hi, I'm [Hemant], a data enthusiast passionate about turning raw data into meani
 I led the full pipeline — from raw data preparation to final dashboarding — ensuring data integrity, structure, and business relevance at every stage.
 
 📫 **Let’s connect:**  
-- GitHub: [(https://github.com/hemant1491)]  
+- [GitHub](https://github.com/hemant1491)
 - LinkedIn: [your-linkedin-profile](https://www.linkedin.com/in/your-linkedin-username/)  
 - Email: hemant0452@outlook.com
 
