@@ -13,7 +13,7 @@
   - [🐍 1. Python (Data Cleaning & Fact + Keyword Table Creation)](#-1-python-data-cleaning--fact--keyword-table-creation)
   - [📊 2. Excel (Other Dimension Table Generation)](#-2-excel-other-dimension-table-generation)
   - [🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)](#-3-mysql-fact-table-structure-first-then-imports--keys)
-  - [📈 4. Power BI (Visualization, DAX & Reporting)](#-4-power-bi-visualization-dax--reporting)
+  - [📈 4. Power BI (Visualization, Modeling & DAX)](#-4-power-bi-visualization-modeling--dax)
 - [🧩 Data Model Overview](#-data-model-overview)
 - [✅ Key Features](#-key-features)
 - [🚀 How to Use](#-how-to-use)
@@ -39,7 +39,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 | **NumPy**            | Numerical transformation support                                        |
 | **Excel**            | Create `competition` and `keyword_difficulty` dimension tables          |
 | **MySQL**            | Define fact table structure first, then import data & enforce relations |
-| **Power BI**         | Build dashboards and use DAX for reporting                              |
+| **Power BI**         | Build dashboards, model schema, and use DAX for reporting               |
 
 ## 📁 Project Files
 
@@ -88,10 +88,21 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
   - Add foreign key constraints to relate tables
 - ✅ **Use MySQL Workbench ER Diagram** to visually validate relationships between fact and dimension tables
 
-### 📈 4. Power BI (Visualization, DAX & Reporting)
-- Connect Power BI to the MySQL database
-- Build dashboards using visuals, filters, and custom DAX measures
-- DAX examples: traffic cost %, CPC efficiency, difficulty-weighted ranks
+### 📈 4. Power BI (Visualization, Modeling & DAX)
+
+#### 📐 Data Modeling in Power BI
+- Imported all tables directly from MySQL
+- Verified relationships using Power BI’s model view
+- Ensured correct cardinality and cross-filtering direction
+- Modeled using a clean **star schema** layout for performance and clarity
+
+#### 🧮 DAX Measures and Logic
+- Created calculated columns and measures such as:
+  - `Total Traffic = SUM(website_traffic_data[Traffic])`
+  - `Avg CPC = AVERAGE(website_traffic_data[CPC])`
+  - `CTR = DIVIDE([Traffic], [Total Impressions])`
+  - `High Potential Score = IF([Competition] < 0.5 && [Keyword Difficulty] < 40, "Yes", "No")`
+- Built dashboards using visuals, slicers, and cards to showcase performance trends and keyword insights
 
 ## 🧩 Data Model Overview
 
@@ -105,9 +116,9 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 ## ✅ Key Features
 - Assign and manage keyword IDs using Python  
 - Build normalized relational structure in MySQL  
-- Clean data pipeline from raw Excel to BI dashboards  
-- Use Excel for supplemental enrichment (competition/difficulty)  
-- Visualize actionable insights using Power BI and DAX  
+- Use Excel for additional dimension data  
+- Apply schema constraints and validate relationships with ER diagrams  
+- Model and visualize insights in Power BI with custom DAX measures
 
 ## 🚀 How to Use
 1. Run Python notebook to generate:
@@ -118,9 +129,9 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
    - Create structure for `website_traffic_data` first  
    - Import all `.csv` files  
    - Run `traffic_data_script.sql` to define schema and constraints  
-   - Use ER Diagram to visually verify table relationships  
+   - Validate schema with ERD view  
 4. Connect Power BI to MySQL  
-5. Build dashboards using DAX and visual components  
+5. Model the data and use DAX to create KPIs and dashboards
 
 ---
 
