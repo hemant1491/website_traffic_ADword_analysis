@@ -137,17 +137,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 
 ## 👤 About Me
 
-Hi, I'm [Hemant], a data enthusiast passionate about turning raw data into meaningful business insights.
-
-🔧 **Skills Used in This Project:**
-- Python (Pandas, NumPy) for data cleaning and transformation
-- Jupyter Notebook for interactive development
-- Excel for formula-based dimension table generation
-- MySQL for relational data modeling with keys
-- Power BI for dashboard design and DAX-based measures
-
-💼 **Project Role:**  
-I led the full pipeline — from raw data preparation to final dashboarding — ensuring data integrity, structure, and business relevance at every stage.
+Hi, I'm Hemant, a data enthusiast passionate about turning raw data into meaningful business insights.
 
 📫 **Let’s connect:**  
 - GitHub : [GitHub Profile](https://github.com/hemant1491)
