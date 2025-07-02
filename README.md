@@ -132,8 +132,8 @@ I led the full pipeline — from raw data preparation to final dashboarding — 
 
 📫 **Let’s connect:**  
 - [GitHub](https://github.com/hemant1491)
-- LinkedIn: [your-linkedin-profile](https://www.linkedin.com/in/your-linkedin-username/)  
-- Email: hemant0452@outlook.com
+- [LinkedIn](https://www.linkedin.com/in/your-linkedin-username/)  
+- [Email]hemant0452@outlook.com
 
 ---
 
