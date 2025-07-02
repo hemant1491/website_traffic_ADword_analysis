@@ -65,7 +65,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 
 ### 🐍 1. Python (Data Cleaning & Fact + Keyword Table Creation)
 - Load `traffic_data_RAW.xls`
-![images/excel_raw_data.png]
+!(images/excel_raw_data.png)
 - Assign unique `keyword_id`s using Python
 - Clean and format data using Pandas and NumPy
 - Export:
