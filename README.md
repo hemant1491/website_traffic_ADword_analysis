@@ -124,8 +124,10 @@ website_traffic_data.head(10)
 ```
 - Clean and Format data using Pandas and NumPy
 - Export:
-  - `website_traffic_data.csv` (fact table)  
+  - `website_traffic_data.csv` (fact table)
+  ![Website Traffic Data](images/website_traffic_data.png)
   - `keyword.csv` (dimension table)
+  ![keyword](images/keyword.png)
 
 ### 📊 2. Excel (Other Dimension Table Generation)
 - Use Excel formulas (VLOOKUP, XLOOKUP, SUMIF) to create:
@@ -133,7 +135,7 @@ website_traffic_data.head(10)
   - `keyword_difficulty.csv`
 
 ### 🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)
-- **Create `website_traffic_data` table structure first** in MySQL  
+- **Create `website_traffic_data` table structure first** in MySQL to avoid data mismatch
 - Import all `.csv` files:  
   - `website_traffic_data.csv`  
   - `keyword.csv`  
