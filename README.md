@@ -162,8 +162,18 @@ CREATE TABLE website_traffic_data (
   - `competition.csv`  
   - `keyword_difficulty.csv`
 - Run `traffic_data_script.sql` to:
-  - Apply primary keys to dimension tables  
+  - Apply primary keys to dimension tables
+  ```mysql
+  ALTER TABLE competition ADD CONSTRAINT pk_competition PRIMARY KEY (`keyword ID`);
+  ALTER TABLE keyword_difficulty ADD CONSTRAINT pk_keyword_difficulty PRIMARY KEY (`keyword ID`);
+  ALTER TABLE keywords ADD CONSTRAINT pk_keywords PRIMARY KEY (`keyword ID`);
+  ```
   - Add foreign key constraints to relate tables
+  ```mysql
+  ALTER TABLE website_traffic_data ADD CONSTRAINT fk_competition FOREIGN KEY (keyword_id) REFERENCES competition(`keyword ID`);
+  ALTER TABLE website_traffic_data ADD CONSTRAINT fk_keyword_difficulty FOREIGN KEY (keyword_id) REFERENCES keyword_difficulty(`keyword ID`);
+  ALTER TABLE website_traffic_data ADD CONSTRAINT fk_keywords FOREIGN KEY (keyword_id) REFERENCES keywords(`keyword ID`);
+  ```
 - ✅ **Use MySQL Workbench ER Diagram** to visually validate relationships between fact and dimension tables
 
 ### 📈 4. Power BI (Visualization, Modeling & DAX)
