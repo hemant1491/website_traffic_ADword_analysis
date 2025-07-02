@@ -175,6 +175,7 @@ CREATE TABLE website_traffic_data (
   ALTER TABLE website_traffic_data ADD CONSTRAINT fk_keywords FOREIGN KEY (keyword_id) REFERENCES keywords(`keyword ID`);
   ```
 - ✅ **Use MySQL Workbench ER Diagram** to visually validate relationships between fact and dimension tables
+![MySQL Table Relation](images/mysql_table_relation.png)
 
 ### 📈 4. Power BI (Visualization, Modeling & DAX)
 
