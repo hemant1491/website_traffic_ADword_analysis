@@ -138,6 +138,24 @@ website_traffic_data.head(10)
 
 ### 🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)
 - **Create `website_traffic_data` table structure first** in MySQL to avoid data mismatch
+```mysql
+CREATE TABLE website_traffic_data (
+    title VARCHAR(255) NOT NULL,
+    keyword_id INT NOT NULL,
+    position INT NOT NULL,
+    previous_position INT NOT NULL,
+    last_seen DATE NOT NULL,
+    search_volume INT NOT NULL,
+    cost_per_click DECIMAL(10 , 2 ) NOT NULL,
+    traffic INT NOT NULL,
+    traffic_percent DECIMAL(10 , 2 ) NOT NULL,
+    traffic_cost INT NOT NULL,
+    traffic_cost_percent DECIMAL(10 , 2 ) NOT NULL,
+    competition DECIMAL(10 , 2 ) NOT NULL,
+    number_of_results INT NOT NULL,
+    keyword_difficulty INT NOT NULL
+);
+```
 - Import all `.csv` files:  
   - `website_traffic_data.csv`  
   - `keyword.csv`  
