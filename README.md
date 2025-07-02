@@ -17,6 +17,7 @@
 - [🧩 Data Model Overview](#-data-model-overview)
 - [✅ Key Features](#-key-features)
 - [🚀 How to Use](#-how-to-use)
+- [👤 About Me](#-about-me)
 
 ---
 
@@ -53,9 +54,9 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
   - `keyword_difficulty.csv` – Difficulty ratings (Excel-generated)  
 
 ### ⚙️ Scripts & Notebooks
-- `assaign_keyword_ID.ipynb` – Python notebook to:
-  - Assign `keyword_id`s  
-  - Generate the fact table and `keyword.csv`  
+- `assaign_keyword_ID.ipynb` – Python notebook for:
+  - Assigning `keyword_id`s  
+  - Generating `website_traffic_data.csv` and `keyword.csv`  
 - `traffic_data_script.sql` – SQL script to:
   - Apply primary/foreign keys  
   - Finalize schema relationships after importing all data  
@@ -71,23 +72,26 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
   - `keyword.csv` (dimension table)
 
 ### 📊 2. Excel (Other Dimension Table Generation)
-- Use formulas (VLOOKUP, XLOOKUP, SUMIF) to create:
+- Use Excel formulas (VLOOKUP, XLOOKUP, SUMIF) to create:
   - `competition.csv`  
   - `keyword_difficulty.csv`
 
 ### 🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)
-- **Create `website_traffic_data` fact table structure first** in MySQL  
-- Import data into `website_traffic_data.csv`  
-- Import the remaining `.csv` dimension tables  
+- **Create `website_traffic_data` table structure first** in MySQL  
+- Import all `.csv` files:  
+  - `website_traffic_data.csv`  
+  - `keyword.csv`  
+  - `competition.csv`  
+  - `keyword_difficulty.csv`
 - Run `traffic_data_script.sql` to:
-  - Add primary keys to dimension tables  
-  - Apply foreign keys to relate fact table with dimensions
+  - Apply primary keys to dimension tables  
+  - Add foreign key constraints to relate tables
+- ✅ **Use MySQL Workbench ER Diagram** to visually validate relationships between fact and dimension tables
 
 ### 📈 4. Power BI (Visualization, DAX & Reporting)
-- Connect Power BI to MySQL database
-- Build dashboards with slicers, charts, and metrics
-- Use **DAX** for custom calculations like:
-  - CPC comparisons, traffic share %, keyword ROI, difficulty trends
+- Connect Power BI to the MySQL database
+- Build dashboards using visuals, filters, and custom DAX measures
+- DAX examples: traffic cost %, CPC efficiency, difficulty-weighted ranks
 
 ## 🧩 Data Model Overview
 
@@ -99,11 +103,11 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 | `keyword_difficulty`    | Dimension    | Keyword difficulty ratings                 | `keyword_id`  | Excel           |
 
 ## ✅ Key Features
-- Assign keyword IDs using Python  
-- Build relational data model (fact + dimensions)  
-- Create fact table schema first to ensure data alignment  
-- Use Excel for flexible lookups and dimension enrichment  
-- Visualize with Power BI and apply DAX for deeper metrics  
+- Assign and manage keyword IDs using Python  
+- Build normalized relational structure in MySQL  
+- Clean data pipeline from raw Excel to BI dashboards  
+- Use Excel for supplemental enrichment (competition/difficulty)  
+- Visualize actionable insights using Power BI and DAX  
 
 ## 🚀 How to Use
 1. Run Python notebook to generate:
@@ -111,10 +115,14 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
    - `keyword.csv`  
 2. Create `competition.csv` and `keyword_difficulty.csv` in Excel  
 3. In MySQL:
-   - First create the structure of `website_traffic_data`  
+   - Create structure for `website_traffic_data` first  
    - Import all `.csv` files  
-   - Run `traffic_data_script.sql` to apply keys and schema constraints  
-4. Connect Power BI to MySQL and build visual dashboards with DAX
+   - Run `traffic_data_script.sql` to define schema and constraints  
+   - Use ER Diagram to visually verify table relationships  
+4. Connect Power BI to MySQL  
+5. Build dashboards using DAX and visual components  
+
+---
 
 ## 👤 About Me
 
