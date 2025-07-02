@@ -93,7 +93,36 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 df['Keyword ID'] = df['Keyword'].apply(keyword_id)
 df.head(10)
 ```
-- Clean and format data using Pandas and NumPy
+- Extract and clean `keyword` names alongside IDs
+```python
+def keyword(value):
+    if 1 == value:
+        return 'Scrum Master'
+    elif 2 == value:
+        return 'AWS'
+    elif 3 == value:
+        return 'PMP'
+    elif 4 == value:
+        return 'Cloud'
+    elif 5 == value:
+        return 'CAPM'
+    elif 6 == value:
+        return 'CSPO'
+    elif 7 == value:
+        return 'ITIL'
+    elif 8 == value:
+        return 'Simplilearn'
+    elif 9 == value:
+        return 'SAFe'
+    elif 10 == value:
+        return 'TOGAF'
+    else:
+        return 'No Value'
+    
+website_traffic_data['Keyword'] = website_traffic_data['Keyword ID'].apply(keyword)
+website_traffic_data.head(10)
+```
+- Clean and Format data using Pandas and NumPy
 - Export:
   - `website_traffic_data.csv` (fact table)  
   - `keyword.csv` (dimension table)
