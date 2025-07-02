@@ -10,10 +10,10 @@
 - [🛠️ Tools Used](#️-tools-used)
 - [📁 Project Files](#-project-files)
 - [🔄 Workflow](#-workflow)
-  - [🐍 1. Python (Jupyter Notebook – Data Cleaning & Fact Table Creation)](#-1-python-jupyter-notebook--data-cleaning--fact-table-creation)
-  - [📊 2. Excel (Dimension Table Generation)](#-2-excel-dimension-table-generation)
-  - [🛢️ 3. MySQL (Data Integration & Relational Modeling)](#-3-mysql-data-integration--relational-modeling)
-  - [📈 4. Power BI (Visualization & Reporting)](#-4-power-bi-visualization--reporting)
+  - [🐍 1. Python (Data Cleaning & Fact + Keyword Table Creation)](#-1-python-data-cleaning--fact--keyword-table-creation)
+  - [📊 2. Excel (Other Dimension Table Generation)](#-2-excel-other-dimension-table-generation)
+  - [🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)](#-3-mysql-fact-table-structure-first-then-imports--keys)
+  - [📈 4. Power BI (Visualization, DAX & Reporting)](#-4-power-bi-visualization-dax--reporting)
 - [🧩 Data Model Overview](#-data-model-overview)
 - [✅ Key Features](#-key-features)
 - [🚀 How to Use](#-how-to-use)
@@ -32,138 +32,88 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 
 | Tool/Library        | Purpose                                                                 |
 |---------------------|-------------------------------------------------------------------------|
-| **Python**           | Assign `keyword_id`, clean raw data, and create the fact table         |
-| **Jupyter Notebook** | Interactive environment for executing Python code step by step         |
-| **Pandas**           | Data manipulation and merging                                          |
-| **NumPy**            | Support for numerical calculations and transformations                 |
-| **Excel**            | Generate dimension tables using VLOOKUP, XLOOKUP, SUMIF                |
-| **MySQL**            | Load CSVs, define schema, and apply PK-FK relationships                |
-| **Power BI**         | Build dashboards and visualize traffic and AdWords insights            |
+| **Python**           | Assign `keyword_id`, create fact and keyword dimension tables           |
+| **Jupyter Notebook** | Interactive Python code and data processing                             |
+| **Pandas**           | Data manipulation and cleaning                                          |
+| **NumPy**            | Numerical transformation support                                        |
+| **Excel**            | Create `competition` and `keyword_difficulty` dimension tables          |
+| **MySQL**            | Define fact table structure first, then import data & enforce relations |
+| **Power BI**         | Build dashboards and use DAX for reporting                              |
 
 ## 📁 Project Files
 
 ### 📄 Data Files
-- **Raw Data**
+- **Raw Source**
   - `traffic_data_RAW.xls` – Original keyword and traffic data export  
 - **Fact Table**
-  - `website_traffic_data.csv` – Cleaned traffic + AdWords data with assigned `keyword_id`s (created using Python)  
-- **Dimension Tables** (created using Excel)
-  - `keyword.csv` – Keyword text and ID mapping  
-  - `competition.csv` – Competition scores per keyword  
-  - `keyword_difficulty.csv` – Difficulty ratings per keyword  
+  - `website_traffic_data.csv` – Keyword-level traffic metrics (Python-generated)  
+- **Dimension Tables**
+  - `keyword.csv` – Keyword ID and text (Python-generated)  
+  - `competition.csv` – Competition scores (Excel-generated)  
+  - `keyword_difficulty.csv` – Difficulty ratings (Excel-generated)  
 
 ### ⚙️ Scripts & Notebooks
-- `assaign_keyword_ID.ipynb` – Jupyter Notebook to:
-  - Assign unique `keyword_id`s  
-  - Clean and prepare the raw data  
-  - Generate the `website_traffic_data.csv` fact table  
+- `assaign_keyword_ID.ipynb` – Python notebook to:
+  - Assign `keyword_id`s  
+  - Generate the fact table and `keyword.csv`  
 - `traffic_data_script.sql` – SQL script to:
-  - Create the relational schema  
-  - Define primary keys on dimension tables  
-  - Apply foreign keys from the fact table
+  - Apply primary/foreign keys  
+  - Finalize schema relationships after importing all data  
 
 ## 🔄 Workflow
 
-```mermaid
-graph LR
-    A[Raw Excel] --> B[Python Script]
-    B --> C[Excel Formulas]
-    C --> D[MySQL Database]
-    D --> E[Power BI Dashboard]
-```
-
-Each stage builds on the last. The result is a smooth, production-style pipeline from messy input to insights.
-
----
-
-### 🐍 1. Python (Jupyter Notebook – Data Cleaning & Fact Table Creation)
-- Load raw data from `traffic_data_RAW.xls`
-![images/excel_raw_data.png](https://github.com/hemant1491/website_traffic_ADword_analysis/blob/82e96b44ce0b7bc3c07e7f48e1eadac3369f6695/images/excel_raw_data.png)
+### 🐍 1. Python (Data Cleaning & Fact + Keyword Table Creation)
+- Load `traffic_data_RAW.xls`
 - Assign unique `keyword_id`s using Python
+- Clean and format data using Pandas and NumPy
+- Export:
+  - `website_traffic_data.csv` (fact table)  
+  - `keyword.csv` (dimension table)
 
-```python
-import numpy as np
-import pandas as pd
-
-excel = pd.read_excel(io='traffic_data_RAW.xls',sheet_name='Sheet 1 - traffic_data-adwords.',header=1)
-excel.head(10)
-  ```
-```python
-  def key_id(value):
-    if 'scrum' in value or 'csm' in value or 'smum' in value or 'srum' in value:
-        return 1
-    elif 'amazon' in value or 'aws' in value or 'devops' in value:
-        return 2
-    elif 'pmp' in value or 'project management' in value or 'pmi' in value or 'proyectos' in value or 'it project' in value:
-        return 3
-    elif 'cloud' in value:
-        return 4
-    elif 'capm' in value:
-        return 5
-    elif 'cspo' in value:
-        return 6
-    elif 'itil' in value or 'itl' in value:
-        return 7
-    elif 'simpl' in value or 'simli' in value or 'simpi' in value or 'smpli' in value or 'simi' in value or 'sipli' in value:
-        return 8
-    elif 'safe' in value or 'scale' in value:
-        return 9
-    elif 'togaf' in value or 'udacity' in value or 'it architect' in value:
-        return 10
-    
-excel['Keyword ID'] = excel['Keyword'].apply(key_id)
-excel.head(10)
-  ```
-- Clean and structure the dataset using Pandas and NumPy
-- Export the cleaned fact table to `website_traffic_data.csv`
-
-### 📊 2. Excel (Dimension Table Generation)
-- Use VLOOKUP, XLOOKUP, and SUMIF formulas to create:
-  - `keyword.csv`  
+### 📊 2. Excel (Other Dimension Table Generation)
+- Use formulas (VLOOKUP, XLOOKUP, SUMIF) to create:
   - `competition.csv`  
   - `keyword_difficulty.csv`
-- Save all dimension tables as `.csv` files
 
-### 🛢️ 3. MySQL (Data Integration & Relational Modeling)
+### 🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)
+- **Create `website_traffic_data` fact table structure first** in MySQL  
+- Import data into `website_traffic_data.csv`  
+- Import the remaining `.csv` dimension tables  
 - Run `traffic_data_script.sql` to:
-  - Create schema and define tables
-  - Apply primary keys (dimension tables) and foreign keys (fact table)
-- Import all CSV files (`website_traffic_data.csv` and dimension tables)
+  - Add primary keys to dimension tables  
+  - Apply foreign keys to relate fact table with dimensions
 
-### 📈 4. Power BI (Visualization & Reporting)
-- Load data from MySQL into Power BI
-- Build interactive dashboards to visualize:
-  - Keyword performance
-  - Traffic share and cost
-  - CPC vs. difficulty vs. competition
+### 📈 4. Power BI (Visualization, DAX & Reporting)
+- Connect Power BI to MySQL database
+- Build dashboards with slicers, charts, and metrics
+- Use **DAX** for custom calculations like:
+  - CPC comparisons, traffic share %, keyword ROI, difficulty trends
 
 ## 🧩 Data Model Overview
 
-| Table Name              | Type         | Description                                | Key Field     | Related To             |
-|-------------------------|--------------|--------------------------------------------|---------------|-------------------------|
-| `website_traffic_data`  | Fact Table   | AdWords traffic metrics for each keyword    | `keyword_id`  | All dimension tables    |
-| `keyword`               | Dimension    | Keyword ID and corresponding text           | `keyword_id`  | `website_traffic_data` |
-| `competition`           | Dimension    | Competition score per keyword               | `keyword_id`  | `website_traffic_data` |
-| `keyword_difficulty`    | Dimension    | Difficulty score per keyword                | `keyword_id`  | `website_traffic_data` |
-
-> ✅ Fact table created using **Python (Jupyter Notebook)**  
-> ✅ Dimension tables created using **Excel**  
-> ✅ Relational model built and linked in **MySQL**  
-> ✅ Insights visualized through **Power BI**
+| Table Name              | Type         | Description                                | Key Field     | Created Using |
+|-------------------------|--------------|--------------------------------------------|---------------|----------------|
+| `website_traffic_data`  | Fact Table   | Keyword-level AdWords traffic metrics      | `keyword_id`  | Python          |
+| `keyword`               | Dimension    | Keyword ID and name mapping                | `keyword_id`  | Python          |
+| `competition`           | Dimension    | Keyword competition scores                 | `keyword_id`  | Excel           |
+| `keyword_difficulty`    | Dimension    | Keyword difficulty ratings                 | `keyword_id`  | Excel           |
 
 ## ✅ Key Features
-- Assign keyword IDs and generate structured data  
-- Perform analysis using relational modeling  
-- Use Excel and Python for preprocessing  
-- Visualize data using Power BI dashboards  
-- Drive better AdWords strategy and SEO decisions
+- Assign keyword IDs using Python  
+- Build relational data model (fact + dimensions)  
+- Create fact table schema first to ensure data alignment  
+- Use Excel for flexible lookups and dimension enrichment  
+- Visualize with Power BI and apply DAX for deeper metrics  
 
 ## 🚀 How to Use
-1. Start with `traffic_data_RAW.xls`  
-2. Run Python notebook to create `website_traffic_data.csv`  
-3. Use Excel to generate dimension tables  
-4. Load all `.csv` files into MySQL  
-5. Run `traffic_data_script.sql` to build schema and relationships  
-6. Visualize insights using Power BI  
+1. Run Python notebook to generate:
+   - `website_traffic_data.csv`  
+   - `keyword.csv`  
+2. Create `competition.csv` and `keyword_difficulty.csv` in Excel  
+3. In MySQL:
+   - First create the structure of `website_traffic_data`  
+   - Import all `.csv` files  
+   - Run `traffic_data_script.sql` to apply keys and schema constraints  
+4. Connect Power BI to MySQL and build visual dashboards with DAX  
 
 ---
