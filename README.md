@@ -4,7 +4,7 @@
 
 ---
 
-## 📚 Table of Contents
+# 📚 Table of Contents
 
 - [🎯 Project Objective](#-project-objective)
 - [🛠️ Tools Used](#️-tools-used)
