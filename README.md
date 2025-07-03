@@ -189,10 +189,14 @@ CREATE TABLE website_traffic_data (
 
 #### 🧮 DAX Measures and Logic
 - Created calculated columns and measures such as:
-  - `Total Traffic = SUM(website_traffic_data[Traffic])`
-  - `Avg CPC = AVERAGE(website_traffic_data[CPC])`
-  - `CTR = DIVIDE([Traffic], [Total Impressions])`
-  - `High Potential Score = IF([Competition] < 0.5 && [Keyword Difficulty] < 40, "Yes", "No")`
+  - `Average CPC = AVERAGE('traffic_data website_traffic_data'[cost_per_click])`
+  - `Total Search Volume = SUM('traffic_data website_traffic_data'[search_volume])`
+  - `SUM('traffic_data website_traffic_data'[traffic])`
+  - `Total Traffic Cost = SUM('traffic_data website_traffic_data'[traffic_cost])`
+  - `Traffic Percent = AVERAGE('traffic_data website_traffic_data'[traffic_percent])`
+  - `Calendar = CALENDAR([Min Date],[Max Date])`
+  - `Max Date = MAX('traffic_data website_traffic_data'[last_seen])`
+  - `Min Date = MIN('traffic_data website_traffic_data'[last_seen])`
 - Built dashboards using visuals, slicers, and cards to showcase performance trends and keyword insights
 
 ## 🧩 Data Model Overview
