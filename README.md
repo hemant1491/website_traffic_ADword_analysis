@@ -1,4 +1,4 @@
- 📊 Website Traffic & Google AdWords Analysis
+# **📊 Website Traffic & Google AdWords Analysis**
 
 **An end-to-end project using Python, Jupyter Notebook, Excel, MySQL, Pandas, NumPy, and Power BI to analyze website traffic and Google AdWords data. This project transforms raw keyword-level data into a structured relational model to uncover insights for SEO, CPC trends, and digital marketing optimization.**
 
