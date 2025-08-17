@@ -67,6 +67,7 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 - Load `traffic_data_RAW.xls`
 ![Excel Raw Data](images/excel_raw_data.png)
 - Assign unique `keyword_id`s using Python
+
 ```python
   def keyword_id(text):
     if 'scrum' in text or 'csm' in text or 'smum' in text or 'srum' in text:
@@ -93,7 +94,9 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 df['Keyword ID'] = df['Keyword'].apply(keyword_id)
 df.head(10)
 ```
+
 - Extract and clean `keyword` names alongside IDs
+
 ```python
 def keyword(value):
     if 1 == value:
@@ -122,6 +125,7 @@ def keyword(value):
 website_traffic_data['Keyword'] = website_traffic_data['Keyword ID'].apply(keyword)
 website_traffic_data.head(10)
 ```
+
 - Clean and Format data using Pandas and NumPy
 - Export:
   - `website_traffic_data.csv` (fact table)
@@ -138,6 +142,7 @@ website_traffic_data.head(10)
 
 ### 🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)
 - **Create `website_traffic_data` table structure first** in MySQL to avoid data mismatch
+
 ```mysql
 CREATE TABLE website_traffic_data (
     title VARCHAR(255) NOT NULL,
@@ -156,6 +161,7 @@ CREATE TABLE website_traffic_data (
     keyword_difficulty INT NOT NULL
 );
 ```
+
 - Import all `.csv` files:  
   - `website_traffic_data.csv`  
   - `keyword.csv`  
@@ -163,17 +169,21 @@ CREATE TABLE website_traffic_data (
   - `keyword_difficulty.csv`
 - Run `traffic_data_script.sql` to:
   - Apply primary keys to dimension tables
+
   ```mysql
   ALTER TABLE competition ADD CONSTRAINT pk_competition PRIMARY KEY (`keyword ID`);
   ALTER TABLE keyword_difficulty ADD CONSTRAINT pk_keyword_difficulty PRIMARY KEY (`keyword ID`);
   ALTER TABLE keywords ADD CONSTRAINT pk_keywords PRIMARY KEY (`keyword ID`);
   ```
+
   - Add foreign key constraints to relate tables
+
   ```mysql
   ALTER TABLE website_traffic_data ADD CONSTRAINT fk_competition FOREIGN KEY (keyword_id) REFERENCES competition(`keyword ID`);
   ALTER TABLE website_traffic_data ADD CONSTRAINT fk_keyword_difficulty FOREIGN KEY (keyword_id) REFERENCES keyword_difficulty(`keyword ID`);
   ALTER TABLE website_traffic_data ADD CONSTRAINT fk_keywords FOREIGN KEY (keyword_id) REFERENCES keywords(`keyword ID`);
   ```
+  
 - ✅ **Use MySQL Workbench ER Diagram** to visually validate relationships between fact and dimension tables
 ![MySQL Table Relation](images/mysql_table_relation.png)
 
