@@ -75,26 +75,19 @@ website_traffic_google_ADword_analysis/
 │  └─ db_config.yaml
 ├─ data/
 │  ├─ final/
-│  │  ├─ .gitkeep
 │  │  ├─ competition.csv
 │  │  ├─ keyword_difficulty.csv
 │  │  ├─ keyword.csv
 │  │  └─ website_traffic_data.csv
 │  ├─ interim/
-│  │  └─ .gitkeep
 │  └─ raw/
-│     ├─ .gitkeep
 │     └─ traffic_data_RAW.xls
-├─ images/
 ├─ notebooks/
-│  ├─ .gitkeep
 │  └─ assaign_keyword_ID.ipynb
 ├─ reports/
 │  ├─ dashboards/
-│  │  ├─ .gitkeep
 │  │  └─ website traffic data.pbix
 │  ├─ figures/
-│  │  ├─ .gitkeep
 │  │  ├─ competition.png
 │  │  ├─ excel_raw_data.png
 │  │  ├─ keyword_difficulty.png
@@ -104,11 +97,8 @@ website_traffic_google_ADword_analysis/
 │  │  ├─ traffic_data_dashboard.png
 │  │  └─ website_traffic_data.png
 │  └─ summary_reports/
-│     └─ .gitkeep
 ├─ scripts/
-│  └─ .gitkeep
 ├─ sql/
-│  ├─ .gitkeep
 │  └─ traffic_data_script.sql
 ├─ .gitignore
 ├─ LICENCE
