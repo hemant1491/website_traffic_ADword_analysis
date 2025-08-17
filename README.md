@@ -9,6 +9,7 @@
 - [🎯 Project Objective](#-project-objective)
 - [🛠️ Tools Used](#️-tools-used)
 - [📁 Project Files](#-project-files)
+- [📁 Project Tree](#-project-tree)
 - [🔄 Workflow](#-workflow)
   - [🐍 1. Python (Data Cleaning & Fact + Keyword Table Creation)](#-1-python-data-cleaning--fact--keyword-table-creation)
   - [📊 2. Excel (Other Dimension Table Generation)](#-2-excel-other-dimension-table-generation)
@@ -16,8 +17,9 @@
   - [📈 4. Power BI (Visualization, Modeling & DAX)](#-4-power-bi-visualization-modeling--dax)
 - [🧩 Data Model Overview](#-data-model-overview)
 - [✅ Key Features](#-key-features)
-- [🚀 How to Use](#-how-to-use)
-- [👤 About Me](#-about-me)
+- [📜 License](#-license)
+- [🤝 Contributing](#-contributing)
+- [👤 Author](#-author)
 
 ---
 
@@ -41,57 +43,125 @@ To convert raw AdWords and website traffic data into a clean, structured dataset
 | **MySQL**            | Define fact table structure first, then import data & enforce relations |
 | **Power BI**         | Build dashboards, model schema, and use DAX for reporting               |
 
+---
+
 ## 📁 Project Files
 
 ### 📄 Data Files
 - **Raw Source**
-  - `traffic_data_RAW.xls` – Original keyword and traffic data export  
+  - `data/raw/traffic_data_RAW.xls` – Original keyword and traffic data export  
 - **Fact Table**
-  - `website_traffic_data.csv` – Keyword-level traffic metrics (Python-generated)  
+  - `data/final/website_traffic_data.csv` – Keyword-level traffic metrics (Python-generated)  
 - **Dimension Tables**
-  - `keyword.csv` – Keyword ID and text (Python-generated)  
-  - `competition.csv` – Competition scores (Excel-generated)  
-  - `keyword_difficulty.csv` – Difficulty ratings (Excel-generated)  
+  - `data/final/keyword.csv` – Keyword ID and text (Python-generated)  
+  - `data/final/competition.csv` – Competition scores (Excel-generated)  
+  - `data/final/keyword_difficulty.csv` – Difficulty ratings (Excel-generated)  
 
 ### ⚙️ Scripts & Notebooks
-- `assaign_keyword_ID.ipynb` – Python notebook for:
+- `notebooks/assaign_keyword_ID.ipynb` – Python notebook for:
   - Assigning `keyword_id`s  
-  - Generating `website_traffic_data.csv` and `keyword.csv`  
-- `traffic_data_script.sql` – SQL script to:
+  - Generating `data/final/website_traffic_data.csv` and `data/final/keyword.csv`  
+- `sql/traffic_data_script.sql` – SQL script to:
   - Apply primary/foreign keys  
-  - Finalize schema relationships after importing all data  
+  - Finalize schema relationships after importing all data
 
+---
+
+## 📂 Project Tree
+
+```
+website_traffic_google_ADword_analysis/
+├─ configs/
+│  └─ db_config.yaml
+├─ data/
+│  ├─ final/
+│  │  ├─ .gitkeep
+│  │  ├─ competition.csv
+│  │  ├─ keyword_difficulty.csv
+│  │  ├─ keyword.csv
+│  │  └─ website_traffic_data.csv
+│  ├─ interim/
+│  │  └─ .gitkeep
+│  └─ raw/
+│     ├─ .gitkeep
+│     └─ traffic_data_RAW.xls
+├─ images/
+├─ notebooks/
+│  ├─ .gitkeep
+│  └─ assaign_keyword_ID.ipynb
+├─ reports/
+│  ├─ dashboards/
+│  │  ├─ .gitkeep
+│  │  └─ website traffic data.pbix
+│  ├─ figures/
+│  │  ├─ .gitkeep
+│  │  ├─ competition.png
+│  │  ├─ excel_raw_data.png
+│  │  ├─ keyword_difficulty.png
+│  │  ├─ keyword.png
+│  │  ├─ mysql_table_relation.png
+│  │  ├─ power_bi_modeling.png
+│  │  ├─ traffic_data_dashboard.png
+│  │  └─ website_traffic_data.png
+│  └─ summary_reports/
+│     └─ .gitkeep
+├─ scripts/
+│  └─ .gitkeep
+├─ sql/
+│  ├─ .gitkeep
+│  └─ traffic_data_script.sql
+├─ .gitignore
+├─ LICENCE
+├─ README.md
+└─ requirements.txt
+
+```
+---
 ## 🔄 Workflow
 
 ### 🐍 1. Python (Data Cleaning & Fact + Keyword Table Creation)
 - Load `traffic_data_RAW.xls`
-![Excel Raw Data](images/excel_raw_data.png)
+![Excel Raw Data](reports/figures/excel_raw_data.png)
 - Assign unique `keyword_id`s using Python
 
 ```python
-  def keyword_id(text):
-    if 'scrum' in text or 'csm' in text or 'smum' in text or 'srum' in text:
+ def keyword_id(text):
+    if "scrum" in text or "csm" in text or "smum" in text or "srum" in text:
         return 1
-    elif 'amazon' in text or 'aws' in text or 'devops' in text:
+    elif "amazon" in text or "aws" in text or "devops" in text:
         return 2
-    elif 'pmp' in text or 'project management' in text or 'pmi' in text or 'proyectos' in text or 'it project' in text:
+    elif (
+        "pmp" in text
+        or "project management" in text
+        or "pmi" in text
+        or "proyectos" in text
+        or "it project" in text
+    ):
         return 3
-    elif 'cloud' in text:
+    elif "cloud" in text:
         return 4
-    elif 'capm' in text:
+    elif "capm" in text:
         return 5
-    elif 'cspo' in text:
+    elif "cspo" in text:
         return 6
-    elif 'itil' in text or 'itl' in text:
+    elif "itil" in text or "itl" in text:
         return 7
-    elif 'simpl' in text or 'simli' in text or 'simpi' in text or 'smpli' in text or 'simi' in text or 'sipli' in text:
+    elif (
+        "simpl" in text
+        or "simli" in text
+        or "simpi" in text
+        or "smpli" in text
+        or "simi" in text
+        or "sipli" in text
+    ):
         return 8
-    elif 'safe' in text or 'scale' in text:
+    elif "safe" in text or "scale" in text:
         return 9
-    elif 'togaf' in text or 'udacity' in text or 'it architect' in text:
+    elif "togaf" in text or "udacity" in text or "it architect" in text:
         return 10
 
-df['Keyword ID'] = df['Keyword'].apply(keyword_id)
+
+df["Keyword ID"] = df["Keyword"].apply(keyword_id)
 df.head(10)
 ```
 
@@ -128,20 +198,20 @@ website_traffic_data.head(10)
 
 - Clean and Format data using Pandas and NumPy
 - Export:
-  - `website_traffic_data.csv` (fact table)
-  ![Website Traffic Data](images/website_traffic_data.png)
-  - `keyword.csv` (dimension table)         
-  ![keyword](images/keyword.png)
+  - `data/final/website_traffic_data.csv` (fact table)
+  ![Website Traffic Data](reports/figures/website_traffic_data.png)
+  - `data/final/keyword.csv` (dimension table)         
+  ![keyword](reports/figures/keyword.png)
 
 ### 📊 2. Excel (Other Dimension Table Generation)
 - Use Excel formulas (VLOOKUP, XLOOKUP, SUMIF) to create:
-  - `competition.csv`   
-  ![Competition](images/competition.png)
-  - `keyword_difficulty.csv`   
-  ![Keyword Difficulty](images/keyword_difficulty.png)
+  - `data/final/competition.csv`   
+  ![Competition](reports/figures/competition.png)
+  - `data/final/keyword_difficulty.csv`   
+  ![Keyword Difficulty](reports/figures/keyword_difficulty.png)
 
 ### 🛢️ 3. MySQL (Fact Table Structure First, Then Imports & Keys)
-- **Create `website_traffic_data` table structure first** in MySQL to avoid data mismatch
+- **Create `data/final/website_traffic_data` table structure first** in MySQL to avoid data mismatch
 
 ```mysql
 CREATE TABLE website_traffic_data (
@@ -163,11 +233,11 @@ CREATE TABLE website_traffic_data (
 ```
 
 - Import all `.csv` files:  
-  - `website_traffic_data.csv`  
-  - `keyword.csv`  
-  - `competition.csv`  
-  - `keyword_difficulty.csv`
-- Run `traffic_data_script.sql` to:
+  - `data/final/website_traffic_data.csv`  
+  - `data/final/keyword.csv`  
+  - `data/final/competition.csv`  
+  - `data/final/keyword_difficulty.csv`
+- Run `sql/traffic_data_script.sql` to:
   - Apply primary keys to dimension tables
 
   ```mysql
@@ -185,17 +255,17 @@ CREATE TABLE website_traffic_data (
   ```
   
 - ✅ **Use MySQL Workbench ER Diagram** to visually validate relationships between fact and dimension tables
-![MySQL Table Relation](images/mysql_table_relation.png)
+![MySQL Table Relation](reports/figures/mysql_table_relation.png)
 
 ### 📈 4. Power BI (Visualization, Modeling & DAX)
-![Dashboard](images/traffic_data_dashboard.png)
+![Dashboard](reports/figures/traffic_data_dashboard.png)
 
 #### 📐 Data Modeling in Power BI
 - Imported all tables directly from MySQL
 - Verified relationships using Power BI’s model view
 - Ensured correct cardinality and cross-filtering direction
 - Modeled using a clean **star schema** layout for performance and clarity
-![Data Modeling](images/power_bi_modeling.png)
+![Data Modeling](reports/figures/power_bi_modeling.png)
 
 #### 🧮 DAX Measures and Logic
 - Created calculated columns and measures such as:
@@ -218,6 +288,8 @@ CREATE TABLE website_traffic_data (
 | `competition`           | Dimension    | Keyword competition scores                 | `keyword_id`  | Excel           |
 | `keyword_difficulty`    | Dimension    | Keyword difficulty ratings                 | `keyword_id`  | Excel           |
 
+---
+
 ## ✅ Key Features
 - Assign and manage keyword IDs using Python  
 - Build normalized relational structure in MySQL  
@@ -225,22 +297,36 @@ CREATE TABLE website_traffic_data (
 - Apply schema constraints and validate relationships with ER diagrams  
 - Model and visualize insights in Power BI with custom DAX measures
 
+---
+
 ## 🚀 How to Use
 1. Run Python notebook to generate:
-   - `website_traffic_data.csv`  
-   - `keyword.csv`  
-2. Create `competition.csv` and `keyword_difficulty.csv` in Excel  
+   - `data/final/website_traffic_data.csv`  
+   - `data/final/keyword.csv`  
+2. Create `data/final/competition.csv` and `data/final/keyword_difficulty.csv` in Excel  
 3. In MySQL:
    - Create structure for `website_traffic_data` first  
    - Import all `.csv` files  
-   - Run `traffic_data_script.sql` to define schema and constraints  
+   - Run `sql/traffic_data_script.sql` to define schema and constraints  
    - Validate schema with ERD view  
 4. Connect Power BI to MySQL  
 5. Model the data and use DAX to create KPIs and dashboards
 
 ---
 
-## 👤 About Me
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please fork the repository and submit a pull request.
+
+---
+
+## 👤 Author
 
 Hi, I'm Hemant, a data enthusiast passionate about turning raw data into meaningful business insights.
 
@@ -249,4 +335,3 @@ Hi, I'm Hemant, a data enthusiast passionate about turning raw data into meaning
 - Email : hemant4dsci@gmail.com
 
 ---
-
