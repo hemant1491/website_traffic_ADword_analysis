@@ -97,6 +97,7 @@ website_traffic_google_ADword_analysis/
 │  │  ├─ traffic_data_dashboard.png
 │  │  └─ website_traffic_data.png
 │  └─ summary_reports/
+│     └─ website_traffic_adwords_report.pdf
 ├─ scripts/
 ├─ sql/
 │  └─ traffic_data_script.sql
