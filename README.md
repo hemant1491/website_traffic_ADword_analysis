@@ -105,7 +105,6 @@ website_traffic_google_ADword_analysis/
 ├─ LICENCE
 ├─ README.md
 └─ requirements.txt
-
 ```
 ---
 ## 🔄 Workflow
